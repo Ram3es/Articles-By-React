@@ -1,8 +1,6 @@
 import React from "react";
 import "./index.scss";
 
-// import classnames from 'classnames';
-
 import { Header } from "../../../Header/containers";
 import { SideBar } from "../../../SideBar/containers";
 

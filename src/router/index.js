@@ -2,6 +2,7 @@ import { ROUTES_PATH, ROUTES_LABEL } from "./constants";
 import React from "react";
 
 import { Articles } from "../containers/Articles/containers";
+import { Article } from "../containers/Articles/components";
 
 export const privateRouter = (userRole) =>
   [
@@ -10,7 +11,17 @@ export const privateRouter = (userRole) =>
       exact: true,
       component: Articles,
       accessLevel: [],
-      children: [],
+      children: [
+        {
+          path: "/:id",
+          exact: true,
+          component: Article,
+          accessLevel: [],
+          children: [],
+          label: ROUTES_LABEL.ARTICLE,
+          icon: null,
+        },
+      ],
       label: ROUTES_LABEL.ARTICLES,
       icon: null,
     },
