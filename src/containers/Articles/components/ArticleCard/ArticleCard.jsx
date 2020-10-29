@@ -3,9 +3,14 @@ import "./index.scss";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { ROUTES_PATH } from "../../../../router/constants";
+import * as action from "../../store/actions";
 
 export default ({ image, title, description, id }) => {
   const dispatch = useDispatch();
+
+  const removeSelectedArticle = () => {
+    dispatch(action.A_RemoveArticleRequest(id));
+  };
 
   return (
     <div className="article">
@@ -20,7 +25,9 @@ export default ({ image, title, description, id }) => {
         >
           Edit
         </button>
-        <button type="button">Remove</button>
+        <button type="button" onClick={removeSelectedArticle}>
+          Remove
+        </button>
       </div>
     </div>
   );

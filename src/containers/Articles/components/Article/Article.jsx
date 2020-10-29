@@ -14,31 +14,36 @@ export default withRouter(
     },
   }) => {
     const dispatch = useDispatch();
+    const [article, setArticle] = useState(null);
 
     useEffect(() => {
-      dispatch(action.A_FetchArticlesRequest());
+      dispatch(action.A_FetchArticleRequest(Number(id)));
     }, [dispatch]);
 
     const selectedArticle = useSelector(getArticle(Number(id)));
 
+    useEffect(() => {
+      setArticle(selectedArticle);
+    }, [selectedArticle]);
+
     const handleChangeArticle = () => {
-      dispatch(
-        action.A_EditArticleRquest({
-          /**
-           * TODO
-           */
-        })
-      );
+      dispatch(action.A_EditArticleRquest(article));
 
       dispatch(push(ROUTES_PATH.ARTICLES));
     };
 
-    return selectedArticle ? (
-      <div className="article">
-        <img src={selectedArticle.image} alt={selectedArticle.title} />
-        <h2>{selectedArticle.title}</h2>
-        <div>{selectedArticle.description}</div>
+    const removeSelectedArticle = () => {
+      dispatch(action.A_RemoveArticleRequest(article.id));
+      dispatch(push(ROUTES_PATH.ARTICLES));
+    };
+
+    return article ? (
+      <div className="article-item">
+        <img src={article.image} alt={article.title} />
+        <h2>{article.title}</h2>
+        <div>{article.description}</div>
         <button onClick={handleChangeArticle}>Save Changes</button>
+        <button onClick={removeSelectedArticle}>Remove article</button>
       </div>
     ) : null;
   }

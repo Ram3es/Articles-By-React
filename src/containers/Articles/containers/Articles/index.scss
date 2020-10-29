@@ -1,5 +1,15 @@
-.articles {
-    width: calc(100% - 200px);
+.articles-wrapper {
+  width: calc(100% - 200px);
+  display: flex;
+  flex-wrap: wrap;
+
+  .add-new-article {
+    margin: 10px;
+    height: 35px;
+  }
+
+  .articles {
     display: flex;
     flex-wrap: wrap;
+  }
 }

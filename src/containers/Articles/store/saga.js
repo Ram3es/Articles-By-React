@@ -1,6 +1,7 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest, select } from "redux-saga/effects";
 import * as constants from "./constants";
 import * as actions from "./actions";
+import * as selectors from "./selectors";
 
 function* fetchAllArticles({ callback }) {
   try {
@@ -45,13 +46,64 @@ function* fetchAllArticles({ callback }) {
   }
 }
 
-/**
- * TODO -> create new worker
- */
+function* fetchArticleById({ payload, callback }) {
+  try {
+    /**
+     * TODO -> request to BD
+     */
+    const article = yield select(selectors.getArticle(payload));
+    yield put(actions.A_FetchArticleSuccess(article));
+  } catch (err) {
+    yield put(actions.A_FetchArticleFailure(err));
+  } finally {
+    callback & (typeof callback === "function") && callback();
+  }
+}
+
+function* editArticle({ payload, callback }) {
+  try {
+    /**
+     * TODO -> request to BD
+     */
+    yield put(actions.A_EditArticleSuccess(payload));
+    yield put(actions.A_EditArticleCleare());
+  } catch (err) {
+    yield put(actions.A_EditArticleFailure(err));
+  } finally {
+    callback & (typeof callback === "function") && callback();
+  }
+}
+
+function* removeArticleById({ payload, callback }) {
+  try {
+    /**
+     * TODO -> request to BD
+     */
+    yield put(actions.A_RemoveArticleSuccess(payload));
+  } catch (err) {
+    yield put(actions.A_RemoveArticleFailure(err));
+  } finally {
+    callback & (typeof callback === "function") && callback();
+  }
+}
+
+function* addNewArticle({ payload, callback }) {
+  try {
+    /**
+     * TODO -> request to BD
+     */
+    yield put(actions.A_AddNewArticleSuccess(payload));
+  } catch (err) {
+    yield put(actions.A_AddNewArticleFailure(err));
+  } finally {
+    callback & (typeof callback === "function") && callback();
+  }
+}
 
 export default function* articlesWatcher() {
-  yield takeLatest(constants.FEATCH_ARTICLES_REQUEST, fetchAllArticles);
-  /**
-   * TODO yield takeLatest();
-   */
+  yield takeLatest(constants.FETCH_ARTICLES_REQUEST, fetchAllArticles);
+  yield takeLatest(constants.FETCH_ARTICLE_REQUEST, fetchArticleById);
+  yield takeLatest(constants.EDIT_ARTICLE_REQUEST, editArticle);
+  yield takeLatest(constants.REMOVE_ARTICLE_REQUEST, removeArticleById);
+  yield takeLatest(constants.ADD_ARTICLE_REQUEST, addNewArticle);
 }
