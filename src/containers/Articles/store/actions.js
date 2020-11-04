@@ -51,15 +51,15 @@ export const A_RemoveArticleRequest = (id) => ({
   type: constants.REMOVE_ARTICLE_REQUEST,
   payload: id,
 });
-export const A_RemoveArticlesSuccess = (id) => ({
+export const A_RemoveArticleSuccess = (id) => ({
   type: constants.REMOVE_ARTICLE_SUCCESS,
   payload: id,
 });
-export const A_RemoveArticlesFailure = (err) => ({
+export const A_RemoveArticleFailure = (err) => ({
   type: constants.REMOVE_ARTICLE_FAILURE,
   payload: err,
 });
-export const A_RemoveArticlesCleare = () => ({
+export const A_RemoveArticleCleare = () => ({
   type: constants.REMOVE_ARTICLE_CLEARE,
 });
 
