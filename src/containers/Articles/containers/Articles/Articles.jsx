@@ -5,10 +5,15 @@ import { ArticleCard } from "../../components/ArticleCard";
 import { getAllArticles } from "../../store/selectors";
 import { actions } from "../../../../store/actions";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
+import { Button } from '@material-ui/core'
+import useStyles from './styles';
 
 export default () => {
   const articles = useSelector(getAllArticles());
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const classes = useStyles();
 
   const addNewArticle = () => {
     dispatch(
@@ -24,9 +29,9 @@ export default () => {
 
   return (
     <div className="articles-wrapper">
-      <button className="add-new-article" onClick={addNewArticle}>
-        Add new Article
-      </button>
+      <Button variant="contained" color="primary" className={classes.button} onClick={addNewArticle}>
+        {t("Add new Article")}
+      </Button>
       <div className="articles">
         {articles.map((article) => (
           <ArticleCard {...article} key={article.id} />
