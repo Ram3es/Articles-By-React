@@ -42,3 +42,11 @@ export function* sagaAssessor(request, failure, callback) {
     callback && typeof callback === "functions" && callback();
   }
 }
+
+export const createReducer = (initialState, handlers) => (
+  state = initialState,
+  action
+) =>
+  handlers.hasOwnProperty(action.type)
+    ? handlers[action.type](state, action)
+    : state;

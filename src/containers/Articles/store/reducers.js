@@ -1,4 +1,5 @@
 import { constants } from "../../../store/constants";
+import { createReducer } from "../../../utils";
 
 const initialState = {
   error: null,
@@ -6,6 +7,23 @@ const initialState = {
   selectedArticle: null,
   loading: false,
 };
+
+// export default createReducer(initialState, {
+//   [constants.FETCH_ARTICLES.REQUEST](state) {
+//     return {
+//       ...state,
+//       loading: true,
+//     };
+//   },
+//   [constants.FETCH_ARTICLES.SUCCESS](state, action) {
+//     return {
+//       ...state,
+//       loading: false,
+//       articles: action.payload,
+//       error: null,
+//     };
+//   }
+// })
 
 export default (state = initialState, action) => {
   switch (action.type) {
