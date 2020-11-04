@@ -1,4 +1,4 @@
-import * as constants from "./constants";
+import { constants } from "../../../store/constants";
 
 const initialState = {
   error: null,
@@ -9,46 +9,46 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case constants.ADD_ARTICLE_REQUEST:
-    case constants.REMOVE_ARTICLE_REQUEST:
-    case constants.EDIT_ARTICLE_REQUEST:
-    case constants.FETCH_ARTICLE_REQUEST:
-    case constants.FETCH_ARTICLES_REQUEST:
+    case constants.ADD_ARTICLE.REQUEST:
+    case constants.REMOVE_ARTICLE.REQUEST:
+    case constants.EDIT_ARTICLE.REQUEST:
+    case constants.FETCH_ARTICLE.REQUEST:
+    case constants.FETCH_ARTICLES.REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case constants.FETCH_ARTICLES_SUCCESS:
+    case constants.FETCH_ARTICLES.SUCCESS:
       return {
         ...state,
         loading: false,
         articles: action.payload,
         error: null,
       };
-    case constants.ADD_ARTICLE_FAILURE:
-    case constants.REMOVE_ARTICLE_FAILURE:
-    case constants.EDIT_ARTICLE_FAILURE:
-    case constants.FETCH_ARTICLE_FAILURE:
-    case constants.FETCH_ARTICLES_FAILURE:
+    case constants.ADD_ARTICLE.FAILURE:
+    case constants.REMOVE_ARTICLE.FAILURE:
+    case constants.EDIT_ARTICLE.FAILURE:
+    case constants.FETCH_ARTICLE.FAILURE:
+    case constants.FETCH_ARTICLES.FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case constants.EDIT_ARTICLE_CLEARE:
+    case constants.EDIT_ARTICLE.CLEARE:
       return { ...state, selectedArticle: null };
-    case constants.FETCH_ARTICLE_CLEARE:
+    case constants.FETCH_ARTICLE.CLEARE:
       return { ...state, selectedArticle: null };
-    case constants.FETCH_ARTICLES_CLEARE:
+    case constants.FETCH_ARTICLES.CLEARE:
       return { ...state, articles: null };
-    case constants.FETCH_ARTICLE_SUCCESS:
+    case constants.FETCH_ARTICLE.SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
         selectedArticle: action.payload,
       };
-    case constants.EDIT_ARTICLE_SUCCESS:
+    case constants.EDIT_ARTICLE.SUCCESS:
       return {
         ...state,
         loading: false,
@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
           }
         }),
       };
-    case constants.REMOVE_ARTICLE_SUCCESS:
+    case constants.REMOVE_ARTICLE.SUCCESS:
       return {
         ...state,
         loading: false,
@@ -70,7 +70,7 @@ export default (state = initialState, action) => {
           (article) => article.id !== action.payload
         ),
       };
-    case constants.ADD_ARTICLE_SUCCESS:
+    case constants.ADD_ARTICLE.SUCCESS:
       return {
         ...state,
         loading: false,

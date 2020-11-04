@@ -3,13 +3,13 @@ import "./index.scss";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { ROUTES_PATH } from "../../../../router/constants";
-import * as action from "../../store/actions";
+import { actions } from "../../../../store/actions";
 
 export default ({ image, title, description, id }) => {
   const dispatch = useDispatch();
 
   const removeSelectedArticle = () => {
-    dispatch(action.A_RemoveArticleRequest(id));
+    dispatch(actions.REMOVE_ARTICLE.REQUEST(id));
   };
 
   return (

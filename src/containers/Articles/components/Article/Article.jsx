@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ROUTES_PATH } from "../../../../router/constants";
 import { getArticle } from "../../store/selectors";
 import { withRouter } from "react-router";
-import * as action from "../../store/actions";
+import { actions } from "../../../../store/actions";
 
 export default withRouter(
   ({
@@ -17,7 +17,7 @@ export default withRouter(
     const [article, setArticle] = useState(null);
 
     useEffect(() => {
-      dispatch(action.A_FetchArticleRequest(Number(id)));
+      dispatch(actions.FETCH_ARTICLE.REQUEST(Number(id)));
     }, [dispatch]);
 
     const selectedArticle = useSelector(getArticle(Number(id)));
@@ -27,13 +27,13 @@ export default withRouter(
     }, [selectedArticle]);
 
     const handleChangeArticle = () => {
-      dispatch(action.A_EditArticleRquest(article));
+      dispatch(actions.EDIT_ARTICLE.REQUEST(article));
 
       dispatch(push(ROUTES_PATH.ARTICLES));
     };
 
     const removeSelectedArticle = () => {
-      dispatch(action.A_RemoveArticleRequest(article.id));
+      dispatch(actions.REMOVE_ARTICLE.REQUEST(article.id));
       dispatch(push(ROUTES_PATH.ARTICLES));
     };
 

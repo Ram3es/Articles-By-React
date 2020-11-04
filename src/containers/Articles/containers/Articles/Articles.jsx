@@ -3,7 +3,7 @@ import "./index.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { ArticleCard } from "../../components/ArticleCard";
 import { getAllArticles } from "../../store/selectors";
-import * as actions from "../../store/actions";
+import { actions } from "../../../../store/actions";
 import { v4 as uuidv4 } from "uuid";
 
 export default () => {
@@ -12,7 +12,7 @@ export default () => {
 
   const addNewArticle = () => {
     dispatch(
-      actions.A_AddNewArticleRequest({
+      actions.ADD_ARTICLE.REQUEST({
         id: uuidv4(),
         title: `Article title ${uuidv4()}`,
         description:
