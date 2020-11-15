@@ -1,6 +1,9 @@
 import { ROUTES_PATH, ROUTES_LABEL } from "./constants";
 import React from "react";
 
+import FolderSpecialIcon from "@material-ui/icons/FolderSpecial";
+import SettingsApplicationsIcon from "@material-ui/icons/SettingsApplications";
+
 import { Articles } from "../containers/Articles/containers";
 import { Article } from "../containers/Articles/components";
 
@@ -33,7 +36,7 @@ export const privateRouter = (userRole) =>
         },
       ],
       label: ROUTES_LABEL.ARTICLES,
-      icon: null,
+      icon: <FolderSpecialIcon />,
     },
     {
       path: ROUTES_PATH.USER,
@@ -42,7 +45,7 @@ export const privateRouter = (userRole) =>
       accessLevel: [],
       children: [],
       label: ROUTES_LABEL.USER,
-      icon: null,
+      icon: <SettingsApplicationsIcon />,
     },
   ].filter((route) => (userRole ? route.accessLevel.includes(userRole) : true));
 

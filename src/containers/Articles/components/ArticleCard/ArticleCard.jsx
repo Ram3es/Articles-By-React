@@ -1,11 +1,20 @@
 import React from "react";
-import "./index.scss";
+import useStyles from "./styles";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { ROUTES_PATH } from "../../../../router/constants";
 import { actions } from "../../../../store/actions";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@material-ui/core";
 
 export default ({ image, title, description, id }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const removeSelectedArticle = () => {
@@ -13,22 +22,33 @@ export default ({ image, title, description, id }) => {
   };
 
   return (
-    <div className="article">
-      <img src={image} alt={title} />
-      <h2>{title}</h2>
-      <div>{description}</div>
-      <div>
-        <button type="button">View</button>
-        <button
-          type="button"
+    <Card className={classes.card}>
+      <CardMedia
+        className={classes.cardMedia}
+        image={image}
+        title="Image title"
+      />
+      <CardContent className={classes.cardContent}>
+        <Typography gutterBottom variant="h5" component="h2">
+          {title}
+        </Typography>
+        <Typography>{description}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary">
+          View
+        </Button>
+        <Button
           onClick={() => dispatch(push(`${ROUTES_PATH.ARTICLES}/${id}`))}
+          size="small"
+          color="primary"
         >
           Edit
-        </button>
-        <button type="button" onClick={removeSelectedArticle}>
+        </Button>
+        <Button size="small" color="secondary" onClick={removeSelectedArticle}>
           Remove
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardActions>
+    </Card>
   );
 };

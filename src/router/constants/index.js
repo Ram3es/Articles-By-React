@@ -12,6 +12,6 @@ export const ROUTES_PATH = {
 
 export const ROUTES_LABEL = {
   ARTICLES: "Articles",
-  ARTICLES: "Article",
+  ARTICLE: "Article",
   USER: "User",
 };
