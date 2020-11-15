@@ -13,7 +13,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-export default ({ image, title, description, id }) => {
+export default ({ image_url, title, description, id }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ export default ({ image, title, description, id }) => {
     <Card className={classes.card}>
       <CardMedia
         className={classes.cardMedia}
-        image={image}
+        image={image_url}
         title="Image title"
       />
       <CardContent className={classes.cardContent}>

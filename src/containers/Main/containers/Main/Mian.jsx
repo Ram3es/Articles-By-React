@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
-import { useDispatch } from "react-redux";
-import { actions } from "../../../../store/actions";
+import { useDispatch, connect } from "react-redux";
+import { A_FetchAllArticlesRequest } from "../../../../store/actions";
 import { CssBaseline, Grid } from "@material-ui/core";
-
+import { bindActionCreators } from "redux";
 import { Header } from "../../../Header/containers";
 import { SideBar } from "../../../SideBar/containers";
 
-export default ({ children }) => {
+const Main = ({ children, actions: { A_FetchAllArticlesRequest } }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    dispatch(actions.FETCH_ARTICLES.REQUEST());
+    // dispatch(actions.FETCH_ARTICLES.REQUEST());
+    A_FetchAllArticlesRequest();
   }, [dispatch]);
 
   return (
@@ -30,3 +31,16 @@ export default ({ children }) => {
     </div>
   );
 };
+
+const mapdispatchtoProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(
+      {
+        A_FetchAllArticlesRequest,
+      },
+      dispatch
+    ),
+  };
+};
+
+export default connect(null, mapdispatchtoProps)(Main);

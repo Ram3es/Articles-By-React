@@ -17,10 +17,13 @@ export default withRouter(
     const [article, setArticle] = useState(null);
 
     useEffect(() => {
-      dispatch(actions.FETCH_ARTICLE.REQUEST(Number(id)));
+      if (id !== "new") {
+        dispatch(actions.FETCH_ARTICLE.REQUEST(Number(id)));
+      }
     }, [dispatch]);
 
-    const selectedArticle = useSelector(getArticle(Number(id)));
+    const selectedArticle =
+      id !== "new" ? useSelector(getArticle(Number(id))) : null;
 
     useEffect(() => {
       setArticle(selectedArticle);
@@ -39,7 +42,7 @@ export default withRouter(
 
     return article ? (
       <div className="article-item">
-        <img src={article.image} alt={article.title} />
+        <img src={article.image_url} alt={article.title} />
         <h2>{article.title}</h2>
         <div>{article.description}</div>
         <button onClick={handleChangeArticle}>Save Changes</button>
