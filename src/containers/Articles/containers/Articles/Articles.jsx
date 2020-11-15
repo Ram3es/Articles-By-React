@@ -6,8 +6,8 @@ import { getAllArticles } from "../../store/selectors";
 import { actions } from "../../../../store/actions";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
-import { Button } from '@material-ui/core'
-import useStyles from './styles';
+import { Button } from "@material-ui/core";
+import useStyles from "./styles";
 
 export default () => {
   const articles = useSelector(getAllArticles());
@@ -29,7 +29,12 @@ export default () => {
 
   return (
     <div className="articles-wrapper">
-      <Button variant="contained" color="primary" className={classes.button} onClick={addNewArticle}>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={addNewArticle}
+      >
         {t("Add new Article")}
       </Button>
       <div className="articles">
