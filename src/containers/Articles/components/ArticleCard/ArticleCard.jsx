@@ -32,7 +32,7 @@ export default ({ image_url, title, description, id }) => {
         <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography>
-        <Typography>{description}</Typography>
+        <Typography><div dangerouslySetInnerHTML={{__html: description}} /></Typography>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary">
