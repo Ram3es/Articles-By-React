@@ -9,3 +9,6 @@ export const getArticle = (id) =>
   createSelector(selectArticlesState, (state) =>
     state.articles.find((article) => article.id === id)
   );
+
+export const increment = () =>
+  createSelector(selectArticlesState, (state) => state.count);

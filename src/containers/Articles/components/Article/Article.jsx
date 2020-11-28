@@ -50,16 +50,16 @@ export default withRouter(
     };
 
     const handleSubmit = (data) => {
-      const payload = {
-        ...data,
-        image_url: "https://picsum.photos/id/237/200/300"
-      }
-
-      delete payload.image // TODO
-
-      if (id) {
-        handleChangeArticle(payload);
+      if (selectedArticle) {
+        handleChangeArticle(data);
       } else {
+        const payload = {
+          ...data,
+          image_url: "https://picsum.photos/id/237/200/300",
+        };
+
+        delete payload.image; // to do
+
         dispatch(actions.ADD_ARTICLE.REQUEST(payload));
         dispatch(push(ROUTES_PATH.ARTICLES));
       }
@@ -77,7 +77,11 @@ export default withRouter(
     return (
       <Formik
         enableReinitialize={true}
-        initialValues={selectedArticle ? { ...selectedArticle, image: selectedArticle.image_url } : FORMS.ARTICLE.INIT}
+        initialValues={
+          selectedArticle
+            ? { ...selectedArticle, image: selectedArticle.image_url }
+            : FORMS.ARTICLE.INIT
+        }
         validationSchema={FORMS.ARTICLE.SCHEME}
         onSubmit={handleSubmit}
       >
@@ -89,9 +93,8 @@ export default withRouter(
           setFieldTouched,
           values: { title, description, image },
         }) => {
-
-          console.log('errors', errors)
-          console.log('touched', touched)
+          console.log("errors", errors);
+          console.log("touched", touched);
 
           return (
             <Form>

@@ -10,5 +10,7 @@ const ARTICLES = [
 
 const USER = ["FETCH_USER"];
 
-export const compose = [...ARTICLES, ...USER];
+const COUNT = ["INKREMENT"];
+
+export const compose = [...ARTICLES, ...USER, ...COUNT];
 export const constants = actionConstantsCreator(compose);

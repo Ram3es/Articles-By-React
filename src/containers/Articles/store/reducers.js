@@ -6,6 +6,7 @@ const initialState = {
   articles: [],
   selectedArticle: null,
   loading: false,
+  count: 0,
 };
 
 // export default createReducer(initialState, {
@@ -32,10 +33,12 @@ export default (state = initialState, action) => {
     case constants.EDIT_ARTICLE.REQUEST:
     case constants.FETCH_ARTICLE.REQUEST:
     case constants.FETCH_ARTICLES.REQUEST:
+    case constants.INKREMENT.REQUEST:
       return {
         ...state,
-        loading: true,
+        count: state.count + 1,
       };
+
     case constants.FETCH_ARTICLES.SUCCESS:
       return {
         ...state,

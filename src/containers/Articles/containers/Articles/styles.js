@@ -14,4 +14,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  input: {
+    margin: "10px",
+  },
 }));

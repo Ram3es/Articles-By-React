@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useDispatch, connect } from "react-redux";
-import { A_FetchAllArticlesRequest } from "../../../../store/actions";
+import { actions } from "../../../../store/actions"; ///A_FetchAllArticlesRequest
 import { CssBaseline, Grid } from "@material-ui/core";
 import { bindActionCreators } from "redux";
 import { Header } from "../../../Header/containers";
@@ -13,8 +13,8 @@ const Main = ({ children, actions: { A_FetchAllArticlesRequest } }) => {
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    // dispatch(actions.FETCH_ARTICLES.REQUEST());
-    A_FetchAllArticlesRequest();
+    dispatch(actions.FETCH_ARTICLES.REQUEST());
+    //A_FetchAllArticlesRequest();
   }, [dispatch]);
 
   return (
@@ -36,7 +36,7 @@ const mapdispatchtoProps = (dispatch) => {
   return {
     actions: bindActionCreators(
       {
-        A_FetchAllArticlesRequest,
+        //A_FetchAllArticlesRequest,
       },
       dispatch
     ),

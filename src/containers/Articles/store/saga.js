@@ -12,8 +12,36 @@ const fetchAllArticles = ({ _, callback }) =>
   sagaAssessor(
     () =>
       function* () {
-        const URL = "/articles";
+        /*const URL = "/articles";
         const { data } = yield call(() => api.get(URL));
+        console.log(data, "data");*/
+        const data = [
+          {
+            id: 0,
+            title: "PArticle 003",
+            description: "Article description",
+            image_url: "https://picsum.photos/id/237/200/300",
+          },
+          {
+            id: 1,
+            title: "Article 002",
+            description: "Article description",
+            image_url: "https://picsum.photos/id/237/200/300",
+          },
+          {
+            id: 2,
+            title: "article 01",
+            description: "Article description",
+            image_url: "https://picsum.photos/id/237/200/300",
+          },
+          {
+            id: 3,
+            title: "TArticle 004",
+            description: "Article description",
+            image_url: "https://picsum.photos/id/237/200/300",
+          },
+        ];
+
         yield put(actions.FETCH_ARTICLES.SUCCESS(data));
       },
     actions.FETCH_ARTICLE.FAILURE,
