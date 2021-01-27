@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import { push } from "connected-react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,22 +12,30 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
-import { increment } from "../../store/selectors";
+import { getArticleCount } from "../../store/selectors";
 
-export default ({ image_url, title, description, id }) => {
+export default ({ image_url, title, description, id, created_at }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [count, setCount] = useState(0);
-  //const increments = useSelector(increment())
+  //const [count, setCount] = useState(0);
+  const count = useSelector(getArticleCount(id));
+
+  useEffect(() => {
+    dispatch(actions.INKREMENT.REQUEST(id));
+  }, [dispatch]);
 
   const removeSelectedArticle = () => {
+    console.log(typeof id, "Article Card");
     dispatch(actions.REMOVE_ARTICLE.REQUEST(id));
   };
 
   const handleViewArticles = () => {
-    // dispatch(actions.INKREMENT.REQUEST())
-    setCount(count + 1);
-   // dispatch(push(`/articles/view/${id}`));
+    dispatch(actions.INKREMENT.SUCCESS(id));
+    // dispatch(actions.INKREMENT.SUCCESS(id));
+
+    // console.log(count[id])
+    // setCount(count + 1);
+    // dispatch(push(`/articles/view/${id}`));
   };
 
   return (
@@ -45,6 +53,7 @@ export default ({ image_url, title, description, id }) => {
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </Typography>
         <Typography>{`watched ${count}`}</Typography>
+        <div>{created_at}</div>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" onClick={handleViewArticles}>

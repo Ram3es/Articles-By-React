@@ -9,16 +9,17 @@ import useStyles from "./styles";
 import { Container, Grid, Button } from "@material-ui/core";
 import { push } from "connected-react-router";
 import { SearchField } from "../../components/SearchField";
+import { articleSort } from "../../../Articles/store/selectors";
 import { byFieldABC } from "../../../../shared";
-
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
 
 export default () => {
-  const articles = useSelector(getAllArticles());
+  //const articles = useSelector(getAllArticles());
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const classes = useStyles();
-
-  
+  const articles = useSelector(articleSort());
 
   return (
     <>

@@ -18,4 +18,11 @@ export default makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));

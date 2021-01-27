@@ -1,4 +1,9 @@
 import { actionConstantsCreator } from "../utils";
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "http://localhost:4001/api/auth",
+});
 
 const ARTICLES = [
   "FETCH_ARTICLES",
@@ -8,9 +13,20 @@ const ARTICLES = [
   "ADD_ARTICLE",
 ];
 
+const AUTH = [
+  "SIGN_IN",
+  "SIGN_UP",
+  "RESET",
+  "ACTIVATION",
+  "FORGOT",
+  "ACCOUNT_LINK_SEND",
+];
+
 const USER = ["FETCH_USER"];
 
 const COUNT = ["INKREMENT"];
 
-export const compose = [...ARTICLES, ...USER, ...COUNT];
+const SORT = ["UPDATE_ADVANCED_SEARCH"];
+
+export const compose = [...ARTICLES, ...USER, ...COUNT, ...SORT, ...AUTH];
 export const constants = actionConstantsCreator(compose);

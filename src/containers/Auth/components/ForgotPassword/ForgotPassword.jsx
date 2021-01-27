@@ -5,6 +5,7 @@ import FORMS from "../../constants";
 import { Link } from "react-router-dom";
 import { ROUTES_PATH } from "../../../../router/constants";
 import useStyles from "./styles";
+import { Auth } from "../../containers/Auth";
 
 const ForgotPassword = () => {
   const classes = useStyles();
@@ -14,7 +15,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <>
+    <Auth>
       <img
         className={classes.icon}
         src="/assets/icons/login.svg"
@@ -64,7 +65,7 @@ const ForgotPassword = () => {
           );
         }}
       </Formik>
-    </>
+    </Auth>
   );
 };
 

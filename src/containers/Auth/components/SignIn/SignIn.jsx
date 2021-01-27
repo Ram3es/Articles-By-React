@@ -1,20 +1,24 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Typography, FormControl, TextField, Button } from "@material-ui/core";
 import { Formik, Form } from "formik";
 import FORMS from "../../constants";
 import { Link } from "react-router-dom";
 import { ROUTES_PATH } from "../../../../router/constants";
 import useStyles from "./styles";
+import { Auth } from "../../containers/Auth";
+import { actions } from "../../store";
 
 const SignIn = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleSubmit = (data) => {
-    // TODO
+    dispatch(actions.A_AuthSignInRequest(data));
   };
 
   return (
-    <>
+    <Auth>
       <img
         className={classes.icon}
         src="/assets/icons/login.svg"
@@ -29,7 +33,7 @@ const SignIn = () => {
         {({ touched, errors, values: { email, password }, handleChange }) => {
           return (
             <Form className={classes.form}>
-              <FormControl margin="normal" required fullWidth>
+              <FormControl margin="normal" fullWidth>
                 <TextField
                   id="email"
                   name="email"
@@ -48,7 +52,7 @@ const SignIn = () => {
                 <TextField
                   id="password"
                   name="password"
-                  label="password"
+                  label="Password"
                   variant="outlined"
                   helperText={touched.password ? errors.password : ""}
                   error={touched.password && Boolean(errors.password)}
@@ -89,7 +93,7 @@ const SignIn = () => {
           );
         }}
       </Formik>
-    </>
+    </Auth>
   );
 };
 

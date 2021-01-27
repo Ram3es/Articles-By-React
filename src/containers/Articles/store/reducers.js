@@ -6,7 +6,12 @@ const initialState = {
   articles: [],
   selectedArticle: null,
   loading: false,
-  count: 0,
+  count: {},
+  A_S: {
+    searchStr: "",
+    oderBy: "",
+    direction: "ASC",
+  },
 };
 
 // export default createReducer(initialState, {
@@ -34,11 +39,44 @@ export default (state = initialState, action) => {
     case constants.FETCH_ARTICLE.REQUEST:
     case constants.FETCH_ARTICLES.REQUEST:
     case constants.INKREMENT.REQUEST:
+      let countInit = { ...state.count, [action.payload]: 0 };
       return {
         ...state,
-        count: state.count + 1,
+        count: countInit,
+      };
+    case constants.INKREMENT.SUCCESS:
+      let newCount = { ...state.count };
+      newCount[action.payload] += 1;
+
+      return {
+        ...state,
+        count: newCount,
+      };
+    case constants.UPDATE_ADVANCED_SEARCH.SUCCESS:
+      /* let changeA_S = {...state.A_S}
+        changeA_S.searchStr = action.payload
+         console.log(changeA_S)*/
+      return {
+        ...state,
+        A_S: {
+          ...state.A_S,
+          searchStr: action.payload.inputValue,
+          oderBy: action.payload.selectValue,
+        },
       };
 
+    /*case constants.INKREMENT.SUCCESS: 
+      let newCount ={...state.count};
+      console.log(newCount,"newCount init")
+      if(newCount[action.payload] ==="undefined"){
+        newCount[action.payload] = 1
+      } else {
+        newCount[action.payload] = newCount[action.payload]+1
+      }
+      return{
+        ...state,
+        count: newCount
+      }*/
     case constants.FETCH_ARTICLES.SUCCESS:
       return {
         ...state,

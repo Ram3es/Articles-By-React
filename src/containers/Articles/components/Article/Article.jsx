@@ -39,12 +39,14 @@ export default withRouter(
       id !== "new" ? useSelector(getArticle(Number(id))) : null;
 
     const handleChangeArticle = (data) => {
+      console.log(data);
       dispatch(actions.EDIT_ARTICLE.REQUEST(data));
 
       dispatch(push(ROUTES_PATH.ARTICLES));
     };
 
     const removeSelectedArticle = () => {
+      console.log(typeof id);
       dispatch(actions.REMOVE_ARTICLE.REQUEST(id));
       dispatch(push(ROUTES_PATH.ARTICLES));
     };
@@ -57,7 +59,7 @@ export default withRouter(
           ...data,
           image_url: "https://picsum.photos/id/237/200/300",
         };
-
+        console.log(payload, "payload");
         delete payload.image; // to do
 
         dispatch(actions.ADD_ARTICLE.REQUEST(payload));
@@ -79,22 +81,26 @@ export default withRouter(
         enableReinitialize={true}
         initialValues={
           selectedArticle
-            ? { ...selectedArticle, image: selectedArticle.image_url }
+            ? { ...selectedArticle } // image: selectedArticle.image_url
             : FORMS.ARTICLE.INIT
         }
         validationSchema={FORMS.ARTICLE.SCHEME}
         onSubmit={handleSubmit}
       >
-        {({
-          errors,
-          touched,
-          handleChange,
-          setFieldValue,
-          setFieldTouched,
-          values: { title, description, image },
-        }) => {
+        {(
+          {
+            errors,
+            touched,
+            handleChange,
+            setFieldValue,
+            setFieldTouched,
+            values: { title, description, image_url },
+          },
+          ...props
+        ) => {
           console.log("errors", errors);
           console.log("touched", touched);
+          console.log(props, "values");
 
           return (
             <Form>
@@ -137,31 +143,33 @@ export default withRouter(
                 <div className={classes.formFieldWrapper}>
                   <Grid container spacing={3}>
                     <Grid item xs={3}>
-                      {image ? (
-                        <img className={classes.image} src={image} alt="" />
+                      {image_url ? (
+                        <img className={classes.image} src={image_url} alt="" />
                       ) : null}
                       <FormControl fullWidth margin="dense">
                         <OutlinedInput
                           fullWidth
-                          error={touched.image && Boolean(errors.image)}
+                          error={touched.image_url && Boolean(errors.image_url)}
                           onChange={async (e) => {
                             e.persist();
+                            console.log(e.target.files, "e target");
                             const [image] = e.target.files;
+                            console.log(image, "image");
 
                             if (image) {
                               const base64ImageUrl = await fileReaderToBase64(
                                 image
                               );
-                              setFieldValue("image", base64ImageUrl);
+                              setFieldValue("image_url", base64ImageUrl);
                               setFieldTouched(e.target.name, true, false);
                             }
                           }}
                           id="image"
-                          inputProps={{ name: "image" }}
+                          inputProps={{ name: "image_url" }}
                           type="file"
                         />
-                        <FormHelperText error={Boolean(errors.image)}>
-                          {touched.image && errors.image}
+                        <FormHelperText error={Boolean(errors.image_url)}>
+                          {touched.image_url && errors.image_url}
                         </FormHelperText>
                       </FormControl>
                     </Grid>
